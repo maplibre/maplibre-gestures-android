@@ -8,6 +8,12 @@ buildscript {
     }
 }
 
+plugins {
+    id "maven-publish"
+    id "signing"
+    alias libs.plugins.nexusPublishPlugin
+}
+
 allprojects {
     repositories {
         google()
@@ -15,14 +21,16 @@ allprojects {
     }
 }
 
-subprojects { subproject ->
-    apply plugin: 'idea'
-
-    if (subproject.name == "library") {
-        apply from: "../gradle/checkstyle.gradle"
+apply from: "${rootDir}/gradle/publish-root.gradle"
+// Set up Sonatype repository
+nexusPublishing {
+    repositories {
+        sonatype {
+            stagingProfileId = sonatypeStagingProfileId
+            username = ossrhUsername
+            password = ossrhPassword
+            nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
+            snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+        }
     }
-}
-
-task clean(type: Delete) {
-    delete rootProject.buildDir
 }

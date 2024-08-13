@@ -30,3 +30,4 @@ timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+nexusPublishPlugin = { id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0" }
