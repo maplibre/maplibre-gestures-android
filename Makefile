@@ -11,3 +11,6 @@ test:
 release:
 	./gradlew :library:assembleRelease
 
+.PHONY: run-android-publish
+run-android-publish:
+	./gradlew :library:publishReleasePublicationToSonatypeRepository closeAndReleaseSonatypeStagingRepository

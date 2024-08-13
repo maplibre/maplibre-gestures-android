@@ -58,3 +58,5 @@ java {
 }
 
 apply from: "${rootDir}/gradle/javadoc.gradle"
+apply from: "${rootDir}/gradle/checkstyle.gradle"
+apply from: "${rootDir}/gradle/gradle-publish.gradle"

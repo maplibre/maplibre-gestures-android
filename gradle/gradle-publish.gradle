@@ -1,0 +1,88 @@
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
+apply from: "${rootDir}/gradle/artifact-settings.gradle"
+apply from: "${rootDir}/gradle/publish-root.gradle"
+
+task androidJavadocs(type: Javadoc) {
+    source = android.sourceSets.main.java.sourceFiles
+    classpath = files(android.bootClasspath)
+    failOnError = false
+}
+
+task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+    archiveClassifier = 'javadoc'
+    from androidJavadocs.destinationDir
+}
+
+task androidSourcesJar(type: Jar) {
+    archiveClassifier = 'sources'
+    from android.sourceSets.main.java.srcDirs
+    from android.sourceSets.main.kotlin.srcDirs
+}
+
+tasks.withType(Javadoc) {
+    options.addStringOption('encoding', 'UTF-8')
+    options.addStringOption('docencoding', 'UTF-8')
+    options.addStringOption('charset', 'UTF-8')
+}
+
+artifacts {
+    archives androidSourcesJar
+    archives androidJavadocsJar
+}
+
+logger.lifecycle(ext["versionName"])
+
+version = project.ext.versionName
+group = project.ext.maplibreArtifactGroupId
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId this.group
+                artifactId project.project.ext.maplibreArtifactId
+                version this.version
+
+                from components.release
+
+                pom {
+                    name = project.ext.maplibreArtifactTitle
+                    description = project.ext.maplibreArtifactTitle
+                    url = project.ext.maplibreArtifactUrl
+                    licenses {
+                        license {
+                            name = project.ext.maplibreArtifactLicenseName
+                            url = project.ext.maplibreArtifactLicenseUrl
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = project.ext.maplibreDeveloperId
+                            name = project.ext.maplibreDeveloperName
+                            email = 'maplibre@maplibre.org'
+                        }
+                    }
+                    scm {
+                        connection = project.ext.maplibreArtifactScmUrl
+                        developerConnection = project.ext.maplibreArtifactScmUrl
+                        url = project.ext.maplibreArtifactUrl
+                    }
+                }
+            }
+        }
+    }
+}
+
+afterEvaluate { project ->
+    android.libraryVariants.all { variant ->
+        tasks.androidJavadocs.doFirst {
+            print("----------------------------------------------------------------------")
+            classpath += files(variant.javaCompile.classpath.files)
+        }
+    }
+}
+
+signing {
+    sign publishing.publications
+}
