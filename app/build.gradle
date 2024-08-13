@@ -7,7 +7,7 @@ android {
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.mapbox.android.gestures.testapp"
+        applicationId "org.maplibre.android.gestures.testapp"
         minSdkVersion 21
         compileSdk 34
         versionCode 1
@@ -32,7 +32,7 @@ android {
         }
     }
 
-    namespace 'com.mapbox.android.gestures.testapp'
+    namespace 'org.maplibre.android.gestures.testapp'
 }
 
 dependencies {
