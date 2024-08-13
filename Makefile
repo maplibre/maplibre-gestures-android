@@ -11,8 +11,3 @@ test:
 release:
 	./gradlew :library:assembleRelease
 
-sdkRegistryUpload:
-	./gradlew :library:mapboxSDKRegistryUpload
-
-sdkRegistryPublish:
-	./gradlew :library:mapboxSDKRegistryPublish

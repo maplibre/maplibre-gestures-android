@@ -53,4 +53,10 @@ dependencies {
     implementation project(":library")
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 apply from: "${rootDir}/gradle/checkstyle.gradle" 

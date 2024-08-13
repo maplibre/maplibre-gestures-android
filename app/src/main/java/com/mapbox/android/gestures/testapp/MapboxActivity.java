@@ -1,7 +1,6 @@
 package com.mapbox.android.gestures.testapp;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

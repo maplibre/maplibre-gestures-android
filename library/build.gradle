@@ -51,4 +51,10 @@ dependencies {
     androidTestImplementation(libs.espressoCore)
 }
 
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
 apply from: "${rootDir}/gradle/javadoc.gradle"
