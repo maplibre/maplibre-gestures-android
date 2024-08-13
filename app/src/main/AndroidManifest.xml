@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.mapbox.android.gestures.testapp">
+    package="org.maplibre.android.gestures.testapp">
 
     <uses-sdk tools:overrideLibrary="com.mapbox.maps,
         com.mapbox.common.module.okhttp,

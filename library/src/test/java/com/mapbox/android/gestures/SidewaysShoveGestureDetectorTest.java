@@ -1,4 +1,4 @@
-package com.mapbox.android.gestures;
+package org.maplibre.android.gestures;
 
 import org.junit.Test;
 

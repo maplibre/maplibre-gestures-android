@@ -32,7 +32,7 @@ android {
         }
     }
 
-    namespace 'com.mapbox.android.gestures'
+    namespace 'org.maplibre.android.gestures'
     kotlinOptions {
         jvmTarget = '17'
     }
