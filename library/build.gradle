@@ -33,9 +33,10 @@ android {
     }
 
     namespace 'org.maplibre.android.gestures'
-    kotlinOptions {
-        jvmTarget = '17'
-    }
+}
+
+kotlin {
+    jvmToolchain(11)
 }
 
 dependencies {
