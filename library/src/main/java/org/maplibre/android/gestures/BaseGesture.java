@@ -1,5 +1,6 @@
 package org.maplibre.android.gestures;
 
+import android.app.Activity;
 import android.content.Context;
 import androidx.annotation.UiThread;
 import androidx.annotation.NonNull;
@@ -31,7 +32,11 @@ public abstract class BaseGesture<L> {
 
   public BaseGesture(Context context, AndroidGesturesManager gesturesManager) {
     this.context = context;
-    this.windowManager = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+    if (context instanceof Activity) {
+      this.windowManager = ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE));
+    } else {
+      this.windowManager = null;
+    }
     this.gesturesManager = gesturesManager;
   }
 
